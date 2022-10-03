@@ -6,6 +6,7 @@ async function getCategories(req, res) {
      const categorias = await connection.query('SELECT * FROM categories;');
      res.status(200).send(categorias.rows);
    } catch (error) {
+    console.log(error)
      res.status(500).send("Não foi possível obter todas as categorias");
    }
 };

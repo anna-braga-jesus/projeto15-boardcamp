@@ -1,12 +1,12 @@
-import pkg from 'pg';
-const {Pool} = pkg;
+import pg from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
-const connection =  new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    password: '12345',
-    database: 'boardcamp'
+const { Pool } = pg;
+const connectionString = process.env.DATABASE_URL;
+
+const connection = new Pool({
+    connectionString
 });
 
-export { connection };
+export {connection};
