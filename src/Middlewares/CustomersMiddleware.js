@@ -1,7 +1,7 @@
 import { connection } from "../Database/db.js";
 import CustomerSchema from '../Schemas/CustomerSchema.js';
 
-async function createCustomerIdMiddleware(req,res){
+async function createCustomerIdMiddleware(req,res, next){
     const { cpf } = req.body;
     const customerId  = req.params.id;
     const existeCustomer = await connection.query('SELECT * FROM customers WHERE id = $1;', [customerId]);
@@ -21,7 +21,7 @@ async function createCustomerIdMiddleware(req,res){
     if(customerEncontrado.length > 0 && customerEncontrado[0].id !== Number(customerId)) {
         return res.sendStatus(409);
     }
+    
     next();
-
 }
 export default createCustomerIdMiddleware;
